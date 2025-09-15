@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
@@ -26,6 +22,15 @@ namespace ConsoleApp1
             public void Betesz() { }
             public void Kivesz() { }
 
+        }
+        public class Hallgato : Szemely
+        {
+            private string _neptunkod;
+
+            public override string ToString()
+            {
+                return $"A hallgato neve {_nev}";
+            }
         }
         public class Szemely
         {
@@ -69,9 +74,12 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Szemely person = new Szemely();
-            person.Eletkor = 45;
-            person.Nev = "Feri";
+            person.Eletkor = 96;
+            person.Nev = "Kund Béla";
             Console.WriteLine(person);
+
+            Hallgato student = new Hallgato();
+            Console.WriteLine(student);
 
             //Szemely person = new Szemely("Andris", 124);
             //Console.WriteLine(person.Kiir());
