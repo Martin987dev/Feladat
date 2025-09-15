@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
@@ -26,6 +27,19 @@ namespace ConsoleApp1
         public class Hallgato : Szemely
         {
             private string _neptunkod;
+
+            public string Neptunkod
+            {
+                get { return _neptunkod; }
+                set
+                {
+                    if(value.Length <= 6)
+                    {
+                        _neptunkod = value;
+                    } else
+                        Console.WriteLine(" Túl hosszú kód");
+                }
+            }
 
             public override string ToString()
             {
@@ -79,8 +93,24 @@ namespace ConsoleApp1
             Console.WriteLine(person);
 
             Hallgato student = new Hallgato();
+            student.Neptunkod = "123456";
             Console.WriteLine(student);
 
+
+            List<Hallgato> studentlist = new List<Hallgato>();
+            for ( int i = 0; i < 3; i++)
+            {
+                Hallgato student2 = new Hallgato();
+                Console.WriteLine($"Kérem a(z) {i+1} hallgató nevét: ");
+                student2.Nev = Console.ReadLine();
+                Console.WriteLine($"Kérem a(z) {i + 1} hallgató életkorát: ");
+                student2.Eletkor = Convert.ToInt32(Console.ReadLine());
+                studentlist.Add(student2);
+            }
+            foreach (var item in studentlist)
+            {
+                Console.WriteLine(item.Nev);
+            }
             //Szemely person = new Szemely("Andris", 124);
             //Console.WriteLine(person.Kiir());
         }
