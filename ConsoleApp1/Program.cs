@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Program
+    internal class Program
     {
         public class BankSzamla
         {
@@ -24,38 +27,21 @@ namespace ConsoleApp1
             public void Kivesz() { }
 
         }
-        public class Hallgato : Szemely
-        {
-            private string _neptunkod;
 
-            public string Neptunkod
-            {
-                get { return _neptunkod; }
-                set
-                {
-                    if(value.Length <= 6)
-                    {
-                        _neptunkod = value;
-                    } else
-                        Console.WriteLine(" Túl hosszú kód");
-                }
-            }
 
-            public override string ToString()
-            {
-                return $"A hallgato neve {_nev}";
-            }
-        }
         public class Szemely
         {
             protected string _nev;
             private int _eletkor;
 
+
+
             public string Nev
             {
-                get { return _nev; } //privat adattag kiolvasashoz
+                get { return _nev; } //privat adattag kiolvasásához
                 set { _nev = value; }
             }
+
             public int Eletkor
             {
                 get { return _eletkor; }
@@ -65,53 +51,96 @@ namespace ConsoleApp1
                     else Console.WriteLine("Nem lehet negatív.");
                 }
             }
+
             public override string ToString()
             {
-               
-                   return $"A személy neve: {Nev}, kora: {Eletkor}";
-                
+                return $"A személy neve: {_nev}, kora: {_eletkor}";
             }
 
 
-            /*public Szemely(string nev, int eletkor)
-            {
-               Nev = nev; Kor = eletkor;
-            }
 
+            
             public string Kiir()
             {
-                return $"A személy neve: {Nev}\nÉletkora: {Kor}";
-            }*/
+                return $"A személy neve: {Nev}\nÉletkora: {Eletkor}";
 
-
+            }
+           
+           
         }
+
+        public class Hallgato : Szemely
+        {
+            private string _neptunkod;
+
+            public string Neptunkod
+            {
+                get { return _neptunkod; }
+                set
+                {
+                    if (value.Length <= 6)
+                    {
+                        _neptunkod = value;
+                    }
+                    else
+                        Console.WriteLine("Túl hosszú kód");
+                }
+            }
+
+            public override string ToString()
+            {
+                _nev = "Pista";
+                return $"A hallgató neve: {_nev}";
+            }
+        }
+        public class Dolgozo : Szemely
+        {
+            private int _ber;
+
+            public Dolgozo()
+            {
+
+            }
+            public override string ToString()
+            {
+                return $"a dolgozó neve: {base.Nev}";
+            }
+        }
+
+
         static void Main(string[] args)
         {
             Szemely person = new Szemely();
-            person.Eletkor = 96;
-            person.Nev = "Kund Béla";
+            person.Eletkor = 33;
+            person.Nev = "Feri";
             Console.WriteLine(person);
 
             Hallgato student = new Hallgato();
             student.Neptunkod = "123456";
             Console.WriteLine(student);
 
-
             List<Hallgato> studentlist = new List<Hallgato>();
-            for ( int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Hallgato student2 = new Hallgato();
-                Console.WriteLine($"Kérem a(z) {i+1} hallgató nevét: ");
+                Console.Write($"Kérem a(z) {i + 1} hallgató nevét: ");
                 student2.Nev = Console.ReadLine();
-                Console.WriteLine($"Kérem a(z) {i + 1} hallgató életkorát: ");
+                Console.Write($"Kérem a(z) {i + 1} hallgató életkorát: ");
                 student2.Eletkor = Convert.ToInt32(Console.ReadLine());
                 studentlist.Add(student2);
             }
+
             foreach (var item in studentlist)
             {
                 Console.WriteLine(item.Nev);
             }
-            //Szemely person = new Szemely("Andris", 124);
+
+            Dolgozo worker = new Dolgozo();
+
+
+            //Console.WriteLine($"A személy neve: {person.Nev}, kora: {person.Eletkor}");
+
+            //Szemely person = new Szemely("Dani", 67);
             //Console.WriteLine(person.Kiir());
         }
     }
